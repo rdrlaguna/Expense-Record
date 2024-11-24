@@ -6,5 +6,5 @@ class App(customtkinter.CTk):
         super().__init__()
 
         self.title("Expense Record")
-        self.geometry("400x150")
+        self.geometry("800x450")
         self.grid_columnconfigure(0, weight=1)
