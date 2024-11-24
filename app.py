@@ -1,9 +1,12 @@
 # Entry file on project
-import customtkinter  # type: ignore
-
+from classes import App
 
 def main():
-    ...
+     # Create new app
+     app = App()
+
+     # Run app
+     app.mainloop()
 
 
 if __name__ == "__main__":
