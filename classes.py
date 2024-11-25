@@ -13,22 +13,17 @@ class App(customtkinter.CTk):
         self.frame_1 = Frame(self, name="Add Element", height=400)
         self.frame_1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
-        # Category window
-        self.toplevel_window = None
-        # Button to open window
-        self.add_category_button = customtkinter.CTkButton(
-            self, 
-            text="Add Category",
-            command=self.add_category()
-            ) 
-        self.add_category_button.grid(row=1, column=0, padx=20, pady=5)
+        self.button_1 = customtkinter.CTkButton(self, text="open toplevel", command=self.open_toplevel)
+        self.button_1.grid(row=1, column=0, padx=20, pady=20)
 
-    def add_category(self):
+        self.toplevel_window = None
+
+    def open_toplevel(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
-            # Create window if it does not exists
-            self.toplevel_window = ToplevelWindow(self)
+            self.toplevel_window = ToplevelWindow(self, name="Add Category")  # create window if its None or destroyed
         else:
-            self.toplevel_window.focus()
+            self.toplevel_window.focus()  # if window exists focus it   
+
 
 
 
@@ -43,11 +38,11 @@ class Frame(customtkinter.CTkFrame):
 
 
 class ToplevelWindow(customtkinter.CTkToplevel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+    def __init__(self, master, name="Title", *args, **kwargs):
+        super().__init__(master, *args, **kwargs)
         self.geometry("400x300")
+        self.title(name)
 
-        self.label = customtkinter.CTkLabel(self, text="Add Category")
+        self.label = customtkinter.CTkLabel(self, text=name)
         self.label.pack(padx=20, pady=20)
 
