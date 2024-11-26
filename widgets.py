@@ -20,20 +20,24 @@ class EntryFrame(Frame):
     def __init__(self, master, name="Add Name", entry="Write here...", button="Submit", **kwargs):
         super().__init__(master, name, **kwargs)
         
-        self.message = None
+        self.status_message = None
 
         # Add entry field
         self.entry_field = customtkinter.CTkEntry(self, placeholder_text=entry)
         self.entry_field.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
 
         # Add button
-        self.button =customtkinter.CTkButton(self, text=button, command=add_category)
+        self.button =customtkinter.CTkButton(
+            self, 
+            text=button, 
+            command=lambda: self.save_results("This is a bloody test")
+            )
         self.button.grid(row=2, column=0, padx=20, pady=5, sticky="ew")
 
-        def add_category():
-            self.message = "This is a test"
-
     def get(self):
-        return self.message
+        return self.status_message
+    
+    def save_results(self, results):
+        self.status_message = results
 
 
