@@ -6,6 +6,7 @@ def database_connect():
     """ Connect to the database """
 
     try:
+        # Connect or create database
         conn = sqlite3.connect('expenses.db')
         return conn
     except sqlite3.Error as err:
@@ -52,3 +53,9 @@ def execute_query(query, params=None):
     except sqlite3.Error as err:
         return f"Error executing query: {err}"
 
+
+def create_category(name=''):
+    insert_query= "INSERT INTO categories (name) VALUES (?)"
+    params = name
+    execute_query(insert_query, params)
+    return f"{name} added to categories"
