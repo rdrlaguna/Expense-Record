@@ -43,10 +43,13 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.geometry("400x300")
         self.grid_columnconfigure(0, weight=1)
         
+        # Add frame to display messages to user
+        self.message = None
 
         # Add frame to add new category
         self.category_add = widgets.EntryFrame(self, name="New Category", entry="Add new category...", button="Add")
-        self.category_add.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
+        self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
+        
         
         # TODO: 
         # Show categories
