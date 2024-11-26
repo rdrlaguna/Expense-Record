@@ -5,6 +5,7 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
+        # Set up main window
         self.title("Expense Record")
         self.geometry("800x450")
         self.grid_columnconfigure((0, 1, 2), weight=1)
@@ -13,16 +14,19 @@ class App(customtkinter.CTk):
         self.frame_1 = Frame(self, name="Add Element", height=400)
         self.frame_1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
 
-        self.button_1 = customtkinter.CTkButton(self, text="open toplevel", command=self.open_toplevel)
-        self.button_1.grid(row=1, column=0, padx=20, pady=20)
+        # Add Category button to manage categories
+        self.categories_button = customtkinter.CTkButton(self, text="Categories", command=self.open_categories_window)
+        self.categories_button.grid(row=1, column=0, padx=20, pady=20)
 
-        self.toplevel_window = None
+        self.categories_window = None
 
-    def open_toplevel(self):
-        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
-            self.toplevel_window = ToplevelWindow(self, name="Add Category")  # create window if its None or destroyed
+    def open_categories_window(self):
+        if self.categories_window is None or not self.categories_window.winfo_exists():
+            # Create window if its None or destroyed
+            self.categories_window = CategoryWindow(self, name="CATEGORIES")  
         else:
-            self.toplevel_window.focus()  # if window exists focus it   
+            # If window exists focus it
+            self.categories_window.focus()     
 
 
 
@@ -37,7 +41,7 @@ class Frame(customtkinter.CTkFrame):
 
 
 
-class ToplevelWindow(customtkinter.CTkToplevel):
+class CategoryWindow(customtkinter.CTkToplevel):
     def __init__(self, master, name="Title", *args, **kwargs):
         super().__init__(master, *args, **kwargs)
         self.geometry("400x300")
