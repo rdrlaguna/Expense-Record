@@ -80,7 +80,8 @@ def create_category(name=''):
 
 def get_all_categories(name=''):
     """ Get a list of all categories in database """
-    select_query = "SELECT * FROM categories ORDER BY category_name ASC"
+    select_query = "SELECT category_name FROM categories ORDER BY category_name ASC"
     results = execute_query(select_query)
+
     print(results)
     return results

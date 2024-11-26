@@ -59,7 +59,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
 
         # Add frame to display current categories
-        self.categories_display = widgets.FrameDisplay(self)
+        self.categories_display = widgets.FrameDisplay(self, values=backend.get_all_categories())
         self.categories_display.grid(row=2, column=0, padx=20, pady=10, sticky="nsew")
         
 
