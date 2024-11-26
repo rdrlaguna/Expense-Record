@@ -41,7 +41,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
 
         # Set up category window
         self.title(name)
-        self.geometry("400x300")
+        self.geometry("400x600")
         self.grid_columnconfigure(0, weight=1)
         
         # Add frame to display messages to user
@@ -57,10 +57,19 @@ class CategoryWindow(customtkinter.CTkToplevel):
             button="Add"
             )
         self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
+
+        # Add frame to display current categories
+        self.categories_display = widgets.FrameDisplay(self)
+        self.categories_display.grid(row=2, column=0, padx=20, pady=10, sticky="nsew")
         
 
     def add_category(self, value):
-        #TODO: Clean value
+        """
+        Add category to the database.
+
+        :param value: The name of the category provided by the user.
+        """
+        #TODO: Validate category name
 
         # Pass value to backend as single tuple
         category_name = (value,)

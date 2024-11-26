@@ -59,9 +59,7 @@ class EntryFrame(Frame):
             self.callback(value)
 
 
-
-
-class FrameDisplay(customtkinter.CtkScrollableFrame):
+class FrameDisplay(customtkinter.CTkScrollableFrame):
     """
     A Scrollable frame Containing one label per element. 
     """
@@ -71,8 +69,9 @@ class FrameDisplay(customtkinter.CtkScrollableFrame):
         self.values = values
         self.labels = []
 
-        for i, value in enumerate(self, values):
-            label = customtkinter.CTkLabel(self, text=value)
-            label.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
-            self.label.append(label)
+        if self.values != None:
+            for i, value in enumerate(self, values):
+                label = customtkinter.CTkLabel(self, text=value)
+                label.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
+                self.label.append(label)
     
