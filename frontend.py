@@ -60,8 +60,11 @@ class CategoryWindow(customtkinter.CTkToplevel):
         
 
     def add_category(self, value):
-        # Pass value to backend
-        self.display_message(backend.create_category(value))
+        #TODO: Clean value
+
+        # Pass value to backend as single tuple
+        category_name = (value,)
+        self.display_message(backend.create_category(category_name))
         
 
     def display_message(self, message):
