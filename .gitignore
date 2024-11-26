@@ -163,3 +163,7 @@ cython_debug/
 
 # Structure 
 draft/
+
+# Database
+*.db
+*.sqlite3

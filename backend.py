@@ -11,7 +11,7 @@ def database_connect():
         return conn
     except sqlite3.Error as err:
         print(f"Error connecting to the database: {err}")
-        return None
+        return 
     
 
 def create_categories_table():
@@ -26,12 +26,17 @@ def create_categories_table():
             CREATE TABLE IF NOT EXISTS categories (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 category_name TEXT NOT NULL
-            )
+            );
         ''')
+        # Allow only unique categoy names
+        cursor.execute('''
+                CREATE UNIQUE INDEX category_name ON categories (category_name);
+            ''')
         conn.commit()
         cursor.close()
     except sqlite3.Error as err:
-        return f"Error creating categories table: {err}"
+        print(f"Error creating categories table: {err}")
+        return 
 
 
 def execute_query(query, params=None):
@@ -44,18 +49,30 @@ def execute_query(query, params=None):
             cursor.execute(query, params)
         else:
             cursor.execute(query)
-        
+
+        conn.commit()
         # Get results
         results = cursor.fetchall()
         cursor.close()
         return results
     
     except sqlite3.Error as err:
-        return f"Error executing query: {err}"
+        raise sqlite3.Error(f"{err}")
 
 
 def create_category(name=''):
-    insert_query= "INSERT INTO categories (name) VALUES (?)"
-    params = name
-    execute_query(insert_query, params)
-    return f"{name} added to categories"
+    """ Add category to table or crete table if not exists. """
+    try:
+        insert_query= "INSERT INTO categories (category_name) VALUES (?)"
+        params = name
+        execute_query(insert_query, params)
+        return f"{name[0]} added to categories"
+    
+    except sqlite3.Error as err:
+        # Create table if it does not exist
+        if "no such table:" in str(err):
+            create_categories_table()
+            return "Categories table created. Add category again"
+
+        print(err)
+        return f"Error executing query: {err}"

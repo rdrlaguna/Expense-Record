@@ -1,7 +1,10 @@
 import customtkinter # type: ignore
 
 class Frame(customtkinter.CTkFrame):
-    """ Frame object with a label """
+    """ 
+    A frame containing a label 
+    :param name: The text to display on the label.
+    """
 
     def __init__(self, master, name="Add Name", **kwargs):
         super().__init__(master, **kwargs)
@@ -15,15 +18,43 @@ class Frame(customtkinter.CTkFrame):
 
 
 class EntryFrame(Frame):
-    """ Frame object with data entry option """
-
-    def __init__(self, master, name="Add Name", entry="Write here...", button="Submit", **kwargs):
+    def __init__(
+            self, master, callback, 
+            name="Add Name", entry="Write here...",
+            button="Submit", **kwargs
+        ):
+        """ 
+        A frame containing a label, an entry field and a button.
+        :param master: The parent widget.
+        :param callback: A function to call when the button is pressed.
+        :param name: The text for the label on the parent widget.
+        :param entry: The text for the placeholder on the entry field.
+        :param button: The text to display on the button widget.
+        """
         super().__init__(master, name, **kwargs)
+        
+        # Reference to callback function for displaying message
+        self.callback = callback
 
         # Add entry field
         self.entry_field = customtkinter.CTkEntry(self, placeholder_text=entry)
         self.entry_field.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
 
         # Add button
-        self.button =customtkinter.CTkButton(self, text=button)
+        self.button =customtkinter.CTkButton(
+            self, 
+            text=button, 
+            command=self.add_entry
+            )
         self.button.grid(row=2, column=0, padx=20, pady=5, sticky="ew")
+
+
+    def add_entry(self):
+        """
+        Pass the value of the entry field to the callback function.
+        """
+        value = self.entry_field.get()
+        # Pass results to callback function
+        if self.callback:
+            self.callback(value)
+
