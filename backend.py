@@ -76,3 +76,11 @@ def create_category(name=''):
 
         print(err)
         return f"Error executing query: {err}"
+    
+
+def get_all_categories(name=''):
+    """ Get a list of all categories in database """
+    select_query = "SELECT category_name FROM categories ORDER BY category_name ASC"
+    results = execute_query(select_query)
+
+    return results
