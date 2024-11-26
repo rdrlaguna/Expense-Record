@@ -44,13 +44,25 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.grid_columnconfigure(0, weight=1)
         
         # Add frame to display messages to user
-        self.message = None
+        self.message = customtkinter.CTkLabel(self, text=None, fg_color="transparent")
+        self.message.grid(row=0, column=0, sticky="ew")
 
         # Add frame to add new category
-        self.category_add = widgets.EntryFrame(self, name="New Category", entry="Add new category...", button="Add")
+        self.category_add = widgets.EntryFrame(
+            self,
+            callback=self.display_message,
+            name="New Category",
+            entry="Add new category...",
+            button="Add"
+            )
         self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
         
-        
+
+    def display_message(self, message):
+        """ Update label with query status. """
+
+        self.message.configure(text=message)
+
         # TODO: 
         # Show categories
         # Edit category
