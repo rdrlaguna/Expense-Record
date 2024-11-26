@@ -74,6 +74,9 @@ class CategoryWindow(customtkinter.CTkToplevel):
         # Pass value to backend as single tuple
         category_name = (value,)
         self.display_message(backend.create_category(category_name))
+
+        # Update frame display with new category
+        self.categories_display.update(backend.get_all_categories())
         
 
     def display_message(self, message):

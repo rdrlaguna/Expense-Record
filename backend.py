@@ -83,5 +83,4 @@ def get_all_categories(name=''):
     select_query = "SELECT category_name FROM categories ORDER BY category_name ASC"
     results = execute_query(select_query)
 
-    print(results)
     return results
