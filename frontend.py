@@ -51,7 +51,7 @@ class EntryFrame(Frame):
 
         # Add entry field
         self.entry_field = customtkinter.CTkEntry(self, placeholder_text=entry)
-        self.entry_field.grid(row=0, column=0, padx=20, pady=20, sticky="ew")
+        self.entry_field.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
 
         # Add button
         self.button =customtkinter.CTkButton(self, text=button)
