@@ -30,7 +30,25 @@ def create_categories_table():
         conn.commit()
         cursor.close()
     except sqlite3.Error as err:
-        print(f"Error creating notes table: {err}")
+        return f"Error creating categories table: {err}"
 
 
+def execute_query(query, params=None):
+    """ Execute a SQL query """
+
+    try:
+        conn = database_connect()
+        cursor = conn.cursor()
+        if params:
+            cursor.execute(query, params)
+        else:
+            cursor.execute(query)
         
+        # Get results
+        results = cursor.fetchall()
+        cursor.close()
+        return results
+    
+    except sqlite3.Error as err:
+        return f"Error executing query: {err}"
+
