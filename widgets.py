@@ -70,10 +70,8 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
         self.labels = []
 
         if self.values != None:
-            for i, value in enumerate(self.values):
-                label = customtkinter.CTkLabel(self, text=value)
-                label.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
-                self.labels.append(label)
+            self.update(self.values)
+    
     
     def update(self, values):
         """ Update labels inside frame """
