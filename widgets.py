@@ -57,29 +57,3 @@ class EntryFrame(Frame):
         if self.callback:
             self.callback(results)
 
-
-
-class MessageLabel(customtkinter.CTkLabel):
-    def __init__(self, master, *args, **kwargs):
-        super().__init__(master, *args, **kwargs)
-
-
-        self.close_button = customtkinter.CTkButton(
-            self,
-            text="X",
-            width=20,
-            height=20,
-            fg_color="red",
-            text_color="white",
-            command=self.hide
-        )
-
-        # Place button on right corner
-        self.close_button.place(
-            x=self.winfo_x() + self.winfo_width() - 25,
-            y=self.winfo_y() + 5
-        )
-
-    def hide(self):
-        """ Clear the label text """
-        self.configure(text="")

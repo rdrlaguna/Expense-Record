@@ -62,6 +62,14 @@ class CategoryWindow(customtkinter.CTkToplevel):
         """ Update label with query status. """
 
         self.message.configure(text=message)
+        # Clear label after 3 seconds
+        if self.message.cget("text") != "":
+            self.after(3000, self.clear_message)
+
+
+    def clear_message(self):
+        """ Clear message label """
+        self.message.configure(text="")
 
         # TODO: 
         # Show categories
