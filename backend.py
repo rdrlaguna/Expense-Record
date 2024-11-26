@@ -11,7 +11,7 @@ def database_connect():
         return conn
     except sqlite3.Error as err:
         print(f"Error connecting to the database: {err}")
-        return None
+        return 
     
 
 def create_categories_table():
@@ -26,12 +26,14 @@ def create_categories_table():
             CREATE TABLE IF NOT EXISTS categories (
                 id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 category_name TEXT NOT NULL
-            )
+            );
+            CREATE UNIQUE INDEX category_name ON categories (category_name)
         ''')
         conn.commit()
         cursor.close()
     except sqlite3.Error as err:
-        return f"Error creating categories table: {err}"
+        print(f"Error creating categories table: {err}")
+        return 
 
 
 def execute_query(query, params=None):
@@ -51,11 +53,15 @@ def execute_query(query, params=None):
         return results
     
     except sqlite3.Error as err:
-        return f"Error executing query: {err}"
+        raise sqlite3.Error(f"{err}")
 
 
 def create_category(name=''):
-    insert_query= "INSERT INTO categories (name) VALUES (?)"
-    params = name
-    execute_query(insert_query, params)
-    return f"{name} added to categories"
+    try:
+        insert_query= "INSERT INTO categories (name) VALUES (?)"
+        params = name
+        execute_query(insert_query, params)
+        return f"{name} added to categories"
+    
+    except sqlite3.Error as err:
+        return f"Error executing query: {err}"

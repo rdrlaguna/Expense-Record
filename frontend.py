@@ -1,4 +1,5 @@
 # Create classes for project
+import backend
 import customtkinter # type: ignore
 import widgets 
 
@@ -50,7 +51,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
         # Add frame to add new category
         self.category_add = widgets.EntryFrame(
             self,
-            callback=self.display_message,
+            callback=self.add_category,
             name="New Category",
             entry="Add new category...",
             button="Add"
@@ -58,17 +59,26 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
         
 
-    def display_message(self, message):
-        """ Update label with query status. """
+    def add_category(self, value):
+        # Pass value to backend
+        self.display_message(backend.create_category(value))
+        
 
-        self.message.configure(text=message)
+    def display_message(self, message):
+        """ Show query status for 3 seconds. """
+
+        if message != "":
+            self.message.configure(text=message)
+        else:
+            self.message.configure(text="Empty")
+
         # Clear label after 3 seconds
         if self.message.cget("text") != "":
             self.after(3000, self.clear_message)
 
 
     def clear_message(self):
-        """ Clear message label """
+        """ Clear message label. """
         self.message.configure(text="")
 
         # TODO: 

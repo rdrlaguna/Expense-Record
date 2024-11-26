@@ -44,16 +44,17 @@ class EntryFrame(Frame):
         self.button =customtkinter.CTkButton(
             self, 
             text=button, 
-            command=self.send_results
+            command=self.add_entry
             )
         self.button.grid(row=2, column=0, padx=20, pady=5, sticky="ew")
 
-    def send_results(self):
+
+    def add_entry(self):
         """
-        Pass the query results to the callback function.
+        Pass the value of the entry field to the callback function.
         """
-        results = "This is a TEST"
+        value = self.entry_field.get()
         # Pass results to callback function
         if self.callback:
-            self.callback(results)
+            self.callback(value)
 
