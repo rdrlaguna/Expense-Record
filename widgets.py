@@ -79,23 +79,31 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
         self.values = values
 
         for i, value in enumerate(self.values):
-                label = customtkinter.CTkLabel(
+                label_frame = CategoryLabel(
                     self,
-                    anchor="w",
-                    text=value,
+                    name=value,
                     corner_radius=5,
                     fg_color="gray20"
                 )
-                label.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
-                self.labels.append(label)
+                label_frame.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
+                self.labels.append(label_frame)
 
 
-class CategoryLabel(customtkinter.CTkLabel):
-    """
-    A label containing one button to delete a category.
-    """
-    def __init__(self, master, **kwargs):
-        super().__init__(self, master, **kwargs)
+                # anchor="w",
+                # text=value,
+                # corner_radius=5,
+                # fg_color="gray20"
+
+
+class CategoryLabel(Frame):
+    def __init__(self, master, name, **kwargs):
+
+        """
+        A frame containing one label and one button.
+        :param name: The category name to display on the label.
+        """
+
+        super().__init__( master, name, **kwargs)
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
 
