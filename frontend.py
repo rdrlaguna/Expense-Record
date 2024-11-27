@@ -59,7 +59,10 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
 
         # Add frame to display current categories
-        self.categories_display = widgets.FrameDisplay(self, values=backend.get_all_categories())
+        self.categories_display = widgets.FrameDisplay(
+            self,
+            callback=self.delete_category, 
+            values=backend.get_all_categories())
         self.categories_display.grid(row=2, column=0, padx=20, pady=10, sticky="nsew")
         
 
@@ -72,7 +75,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
         #TODO: Validate category name
 
         # Pass value to backend as single tuple
-        category_name = (value,)
+        category_name = value
         self.display_message(backend.create_category(category_name))
 
         # Update frame display with new category
@@ -96,6 +99,13 @@ class CategoryWindow(customtkinter.CTkToplevel):
         """ Clear message label. """
         self.message.configure(text="")
 
-        # TODO: 
-        # Show categories
-        # Edit category
+
+    def delete_category(self, category_id):
+        """ Delete category from database. """
+
+        # Delete category and show message to user
+        self.display_message(backend.delete_category(category_id))
+
+        # Update frame display with new category
+        self.categories_display.update(backend.get_all_categories())
+        

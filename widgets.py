@@ -63,10 +63,11 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
     """
     A Scrollable frame Containing one label per element. 
     """
-    def __init__(self, master, values=None, **kwargs):
+    def __init__(self, master, callback, values=None, **kwargs):
         super().__init__(master, **kwargs)
 
         self.grid_columnconfigure(0, weight=1)
+        self.callback = callback
         self.values = values
         self.labels = []
 
@@ -75,16 +76,56 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
     
 
     def update(self, values):
-        """ Update labels inside frame """
+        """ Update labels inside frame. """
         self.values = values
 
-        for i, value in enumerate(self.values):
-                label = customtkinter.CTkLabel(
+        # Remove labels if any
+        if self.labels:
+            for label in self.labels:
+                label.destroy()
+
+        # Add new labels
+        for i, (id, name) in enumerate(self.values):
+                label_frame = CategoryLabel(
                     self,
-                    anchor="w",
-                    text=value,
+                    callback=self.callback,
+                    name=name,
+                    id=id,
                     corner_radius=5,
                     fg_color="gray20"
                 )
-                label.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
-                self.labels.append(label)
+                label_frame.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
+                self.labels.append(label_frame)
+
+
+
+class CategoryLabel(Frame):
+    def __init__(self, master, callback, name, id, **kwargs):
+
+        """
+        A frame containing one label and one button.
+        :param name: The category name to display on the label.
+        :param id: The category id to be able to delete it.
+        """
+
+        super().__init__( master, name, **kwargs)
+
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.callback = callback
+        self.category_id = id
+
+        delete_button = customtkinter.CTkButton(
+            self, 
+            text="DELETE",
+            fg_color="gray50",
+            hover_color="gray40",
+            command=self.get_id
+        )
+        delete_button.grid(row=0, column=2, padx=20, pady=10)
+
+    def get_id(self):
+        if self.callback:
+            self.callback(self.category_id)
+            
+
+

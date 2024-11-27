@@ -64,7 +64,7 @@ def create_category(name=''):
     """ Add category to table or crete table if not exists. """
     try:
         insert_query= "INSERT INTO categories (category_name) VALUES (?)"
-        params = name
+        params = (name,)
         execute_query(insert_query, params)
         return f"{name[0]} added to categories"
     
@@ -78,9 +78,17 @@ def create_category(name=''):
         return f"Error executing query: {err}"
     
 
-def get_all_categories(name=''):
+def get_all_categories():
     """ Get a list of all categories in database """
-    select_query = "SELECT category_name FROM categories ORDER BY category_name ASC"
+    select_query = "SELECT * FROM categories ORDER BY category_name ASC"
     results = execute_query(select_query)
 
     return results
+
+
+def delete_category(category_id):
+    """ Delete a category by its id """
+    delete_query = "DELETE FROM categories WHERE id = ?"
+    params = (category_id,)
+    execute_query(delete_query, params)
+    return f"Category deleted"
