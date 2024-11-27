@@ -85,6 +85,7 @@ def get_all_categories(name=''):
 
     return results
 
+
 def delete_category(category_id):
     """ Delete a category by its id """
     delete_query = "DELETE FROM categories WHERE id = ?"

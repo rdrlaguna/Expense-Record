@@ -88,3 +88,16 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
                 )
                 label.grid(row=i, column=0, padx=10, pady=(0, 5), sticky="ew")
                 self.labels.append(label)
+
+
+class CategoryLabel(customtkinter.CTkLabel):
+    """
+    A label containing one button to delete a category.
+    """
+    def __init__(self, master, **kwargs):
+        super().__init__(self, master, **kwargs)
+
+        self.grid_columnconfigure((0, 1, 2), weight=1)
+
+        delete_button = customtkinter.CTkButton(self, text="DELETE")
+        delete_button.grid(row=0, column=2, padx=20, pady=10)
