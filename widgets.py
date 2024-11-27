@@ -78,10 +78,11 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
         """ Update labels inside frame """
         self.values = values
 
-        for i, value in enumerate(self.values):
+        for i, (id, name) in enumerate(self.values):
                 label_frame = CategoryLabel(
                     self,
-                    name=value,
+                    name=name,
+                    id=id,
                     corner_radius=5,
                     fg_color="gray20"
                 )
@@ -91,16 +92,18 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
 
 
 class CategoryLabel(Frame):
-    def __init__(self, master, name, **kwargs):
+    def __init__(self, master, name, id, **kwargs):
 
         """
         A frame containing one label and one button.
         :param name: The category name to display on the label.
+        :param id: The category id to be able to delete it.
         """
 
         super().__init__( master, name, **kwargs)
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.category_id = id
 
         delete_button = customtkinter.CTkButton(
             self, 

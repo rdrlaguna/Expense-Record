@@ -72,7 +72,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
         #TODO: Validate category name
 
         # Pass value to backend as single tuple
-        category_name = (value,)
+        category_name = value
         self.display_message(backend.create_category(category_name))
 
         # Update frame display with new category
