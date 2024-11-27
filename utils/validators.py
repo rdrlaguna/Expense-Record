@@ -14,6 +14,6 @@ def validate_category_name(name):
     
     # Validate name lenght
     if len(name) < 4 or len(name) > 16:
-        raise ValueError(f"Name must be between 4 to 16 characters long.")
+        raise ValueError(f"Name must have between 4 to 16 characters.")
     
     return True

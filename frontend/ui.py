@@ -1,6 +1,7 @@
 # Create classes for project
 import backend.backend as backend
 import customtkinter # type: ignore
+import utils.validators as va
 import widgets.custom_widgets as widgets
 
 
@@ -72,15 +73,22 @@ class CategoryWindow(customtkinter.CTkToplevel):
 
         :param value: The name of the category provided by the user.
         """
-        #TODO: Validate category name
-
-        # Pass value to backend as single tuple
-        category_name = value
-        self.display_message(backend.create_category(category_name))
-
-        # Update frame display with new category
-        self.categories_display.update(backend.get_all_categories())
         
+        try:
+            # Validate category name
+            if va.validate_category_name(value):
+                # Clean value and turn it to lowercase
+                category_name = value.strip().lower()
+
+                # Add name to database
+                self.display_message(backend.create_category(category_name))
+                
+                # Update frame display with new category
+                self.categories_display.update(backend.get_all_categories())
+
+        except ValueError as err:
+            # Display validation error message
+            self.display_message(err)
 
     def display_message(self, message):
         """ Show query status for 3 seconds. """
