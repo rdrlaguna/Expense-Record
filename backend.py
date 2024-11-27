@@ -84,3 +84,10 @@ def get_all_categories(name=''):
     results = execute_query(select_query)
 
     return results
+
+def delete_category(category_id):
+    """ Delete a category by its id """
+    delete_query = "DELETE FROM categories WHERE id = ?"
+    params = (category_id,)
+    execute_query(delete_query, params)
+    return f"Category deleted"
