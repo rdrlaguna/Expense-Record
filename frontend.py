@@ -107,12 +107,5 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.display_message(backend.delete_category(category_id))
 
         # Update frame display with new category
-        # TODO: 
-        # Remove all frames from Display, add new frames.
-        categories = backend.get_all_categories()
         self.categories_display.update(backend.get_all_categories())
-
-
-        # TODO: 
-        # Show categories
-        # Edit category
+        

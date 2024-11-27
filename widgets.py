@@ -79,6 +79,12 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
         """ Update labels inside frame. """
         self.values = values
 
+        # Remove labels if any
+        if self.labels:
+            for label in self.labels:
+                label.destroy()
+
+        # Add new labels
         for i, (id, name) in enumerate(self.values):
                 label_frame = CategoryLabel(
                     self,
@@ -120,5 +126,6 @@ class CategoryLabel(Frame):
     def get_id(self):
         if self.callback:
             self.callback(self.category_id)
+            
 
 
