@@ -59,7 +59,10 @@ class CategoryWindow(customtkinter.CTkToplevel):
         self.category_add.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
 
         # Add frame to display current categories
-        self.categories_display = widgets.FrameDisplay(self, values=backend.get_all_categories())
+        self.categories_display = widgets.FrameDisplay(
+            self,
+            callback=self.delete_category, 
+            values=backend.get_all_categories())
         self.categories_display.grid(row=2, column=0, padx=20, pady=10, sticky="nsew")
         
 
@@ -103,8 +106,11 @@ class CategoryWindow(customtkinter.CTkToplevel):
         # Delete category and show message to user
         self.display_message(backend.delete_category(category_id))
 
-        # Update category list on screen
-        self.categories_display.update(backend.get_all_categories)
+        # Update frame display with new category
+        # TODO: 
+        # Remove all frames from Display, add new frames.
+        categories = backend.get_all_categories()
+        self.categories_display.update(backend.get_all_categories())
 
 
         # TODO: 
