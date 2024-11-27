@@ -71,7 +71,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
         """
         Add category to the database.
 
-        :param value: The name of the category provided by the user.
+        :param value: The input provided by the user.
         """
         
         try:
@@ -82,13 +82,14 @@ class CategoryWindow(customtkinter.CTkToplevel):
 
                 # Add name to database
                 self.display_message(backend.create_category(category_name))
-                
+
                 # Update frame display with new category
                 self.categories_display.update(backend.get_all_categories())
 
         except ValueError as err:
             # Display validation error message
             self.display_message(err)
+
 
     def display_message(self, message):
         """ Show query status for 3 seconds. """

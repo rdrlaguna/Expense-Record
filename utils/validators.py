@@ -10,7 +10,7 @@ def validate_category_name(name):
     
     # Validate string has only letters
     if not name.isalpha():
-        raise ValueError(f"The name must have only letters.")
+        raise ValueError(f"The name must contain only letters.")
     
     # Validate name lenght
     if len(name) < 4 or len(name) > 16:

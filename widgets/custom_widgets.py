@@ -89,7 +89,7 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
                 label_frame = CategoryLabel(
                     self,
                     callback=self.callback,
-                    name=name,
+                    name=name.title(),
                     id=id,
                     corner_radius=5,
                     fg_color="gray20"
