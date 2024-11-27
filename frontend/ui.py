@@ -1,7 +1,7 @@
 # Create classes for project
-import backend
+import backend.backend as backend
 import customtkinter # type: ignore
-import widgets 
+import widgets.custom_widgets as widgets
 
 
 class App(customtkinter.CTk):

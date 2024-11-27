@@ -1,5 +1,5 @@
 # Entry file on project
-from frontend import App
+from frontend.ui import App
 import customtkinter  # type: ignore
 
 def main():
