@@ -66,7 +66,7 @@ def create_category(name=''):
         insert_query= "INSERT INTO categories (category_name) VALUES (?)"
         params = (name,)
         execute_query(insert_query, params)
-        return f"{name[0]} added to categories"
+        return {"status": 0, "results": name[0] + " added to categories"}
     
     except sqlite3.Error as err:
         # Create table if it does not exist
@@ -82,7 +82,7 @@ def get_all_categories():
     """ Get a list of all categories in database """
     select_query = "SELECT * FROM categories ORDER BY category_name ASC"
     results = execute_query(select_query)
-    return {"status": 0, "results": results}
+    return results
 
 
 def delete_category(category_id):
