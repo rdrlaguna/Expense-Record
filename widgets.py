@@ -89,11 +89,6 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
                 self.labels.append(label_frame)
 
 
-                # anchor="w",
-                # text=value,
-                # corner_radius=5,
-                # fg_color="gray20"
-
 
 class CategoryLabel(Frame):
     def __init__(self, master, name, **kwargs):
@@ -107,5 +102,10 @@ class CategoryLabel(Frame):
 
         self.grid_columnconfigure((0, 1, 2), weight=1)
 
-        delete_button = customtkinter.CTkButton(self, text="DELETE")
+        delete_button = customtkinter.CTkButton(
+            self, 
+            text="DELETE",
+            fg_color="gray50",
+            hover_color="gray40"
+        )
         delete_button.grid(row=0, column=2, padx=20, pady=10)

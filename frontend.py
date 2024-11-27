@@ -96,6 +96,17 @@ class CategoryWindow(customtkinter.CTkToplevel):
         """ Clear message label. """
         self.message.configure(text="")
 
+
+    def delete_category(self, category_id):
+        """ Delete category from database. """
+
+        # Delete category and show message to user
+        self.display_message(backend.delete_category(category_id))
+
+        # Update category list on screen
+        self.categories_display.update(backend.get_all_categories)
+
+
         # TODO: 
         # Show categories
         # Edit category
