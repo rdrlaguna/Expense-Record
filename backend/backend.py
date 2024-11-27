@@ -66,7 +66,7 @@ def create_category(name=''):
         insert_query= "INSERT INTO categories (category_name) VALUES (?)"
         params = (name,)
         execute_query(insert_query, params)
-        return {"status": 0, "results": name[0] + " added to categories"}
+        return {"status": 0, "results": name.title() + " added to categories"}
     
     except sqlite3.Error as err:
         # Create table if it does not exist
