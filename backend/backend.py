@@ -82,8 +82,7 @@ def get_all_categories():
     """ Get a list of all categories in database """
     select_query = "SELECT * FROM categories ORDER BY category_name ASC"
     results = execute_query(select_query)
-
-    return results
+    return {"status": 0, "results": results}
 
 
 def delete_category(category_id):
@@ -91,4 +90,4 @@ def delete_category(category_id):
     delete_query = "DELETE FROM categories WHERE id = ?"
     params = (category_id,)
     execute_query(delete_query, params)
-    return f"Category deleted"
+    return {"status": 0, "results": "Category deleted"}
