@@ -1,0 +1,1 @@
+# Hold style constants for the project

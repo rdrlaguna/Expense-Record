@@ -110,7 +110,7 @@ class CategoryWindow(customtkinter.CTkToplevel):
                     fg_color="red"
                 )
             else:
-                self.message.configure(message)
+                self.message.configure(text=message)
 
         # Clear label after 3 seconds
         if self.message.cget("text") != "":
