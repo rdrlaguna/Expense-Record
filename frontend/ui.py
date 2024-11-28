@@ -10,18 +10,45 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
+        # Get screen dimensions
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+
         # Set up main window
         self.title("Expense Record")
-        self.geometry("800x450")
+        # Set window size
+        window_width = screen_width // 2
+        self.geometry(f"{window_width}x{screen_height}+0+0")
         self.grid_columnconfigure((0, 1, 2), weight=1)
+        self.grid_rowconfigure(1, weight=1)
+
+        # Set background color
+        self.configure(fg_color=cons.COLORS["bg"]["window"])
+
+        # Search bar to locate expenses
+        self.search_bar = widgets.Frame(self, name="Search bar")
+        self.search_bar.grid(row=0, column=0, padx=20, pady=20, sticky="ew", columnspan=3)
+
+        # Add Frame to display the expenses
+        self.expenses_display = widgets.FrameDisplay(
+            self,
+            )
+        self.expenses_display.grid(
+            row=1, 
+            column=0, 
+            padx=20, 
+            pady=(10, 0), 
+            sticky="nsew", 
+            columnspan=3
+        )
 
         # Add frame
-        self.frame_1 = widgets.Frame(self, name="Add Element", height=400)
-        self.frame_1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.frame_1 = widgets.Frame(self, name="Add Element")
+        self.frame_1.grid(row=2, column=0, padx=20, pady=20, sticky="ew", columnspan=3)
 
         # Add Category button to manage categories
         self.categories_button = customtkinter.CTkButton(self, text="Categories", command=self.open_categories_window)
-        self.categories_button.grid(row=1, column=0, padx=20, pady=20)
+        self.categories_button.grid(row=3, column=0, padx=20, pady=20)
 
         self.categories_window = None
 

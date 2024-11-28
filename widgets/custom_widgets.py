@@ -63,7 +63,7 @@ class FrameDisplay(customtkinter.CTkScrollableFrame):
     """
     A Scrollable frame Containing one label per element. 
     """
-    def __init__(self, master, callback, values=None, **kwargs):
+    def __init__(self, master, callback=None, values=None, **kwargs):
         super().__init__(master, **kwargs)
 
         self.grid_columnconfigure(0, weight=1)
