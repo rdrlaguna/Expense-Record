@@ -21,6 +21,9 @@ class App(customtkinter.CTk):
         self.geometry(f"{window_width}x{screen_height}+0+0")
         self.grid_columnconfigure((0, 1, 2), weight=1)
 
+        # Set background color
+        self.configure(fg_color=cons.COLORS["bg"]["window"])
+
         # Add frame
         self.frame_1 = widgets.Frame(self, name="Add Element", height=400)
         self.frame_1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
