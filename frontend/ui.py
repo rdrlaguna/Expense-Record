@@ -10,9 +10,15 @@ class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
+        # Get screen dimensions
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+
         # Set up main window
         self.title("Expense Record")
-        self.geometry("800x450")
+        # Set window size
+        window_width = screen_width // 2
+        self.geometry(f"{window_width}x{screen_height}+0+0")
         self.grid_columnconfigure((0, 1, 2), weight=1)
 
         # Add frame
