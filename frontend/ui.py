@@ -29,7 +29,7 @@ class App(customtkinter.CTk):
         self.search_bar = widgets.Frame(self, name="Search bar")
         self.search_bar.grid(row=0, column=0, padx=20, pady=20, sticky="ew", columnspan=3)
 
-        # Add Frame to display the expenses
+        # Frame to display the expenses
         self.expenses_display = widgets.FrameDisplay(
             self,
             )
@@ -42,8 +42,8 @@ class App(customtkinter.CTk):
             columnspan=3
         )
 
-        # Add frame
-        self.frame_1 = widgets.Frame(self, name="Add Element")
+        # Frame to insert new expenses
+        self.frame_1 = widgets.Frame(self, name="Add Expenses")
         self.frame_1.grid(row=2, column=0, padx=20, pady=20, sticky="ew", columnspan=3)
 
         # Add Category button to manage categories
