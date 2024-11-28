@@ -1,5 +1,6 @@
 # Create classes for project
 import backend.backend as backend
+from . import constants as cons
 import customtkinter # type: ignore
 import utils.validators as va
 import widgets.custom_widgets as widgets
@@ -101,13 +102,13 @@ class CategoryWindow(customtkinter.CTkToplevel):
                 if message["status"] == 0:
                     self.message.configure(
                         text=message["results"],
-                        fg_color="green"
+                        fg_color=cons.COLORS["alert"]["ok"]
                     )
                 # When some error happened
                 elif message["status"] == 1:
                     self.message.configure(
                     text=message["results"],
-                    fg_color="red"
+                    fg_color=cons.COLORS["alert"]["error"]
                 )
             else:
                 self.message.configure(text=message)
