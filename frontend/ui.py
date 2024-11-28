@@ -25,6 +25,7 @@ class App(customtkinter.CTk):
         # Set background color
         self.configure(fg_color=cons.COLORS["bg"]["window"])
 
+        # Add Frame to display the expenses
         self.expenses_display = widgets.FrameDisplay(
             self,
             )
