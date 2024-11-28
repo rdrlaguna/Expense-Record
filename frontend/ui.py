@@ -1,5 +1,6 @@
 # Create classes for project
 import backend.backend as backend
+from . import constants as cons
 import customtkinter # type: ignore
 import utils.validators as va
 import widgets.custom_widgets as widgets
@@ -88,16 +89,29 @@ class CategoryWindow(customtkinter.CTkToplevel):
 
         except ValueError as err:
             # Display validation error message
-            self.display_message(err)
+            self.display_message({"status": 1, "results": err})
 
 
     def display_message(self, message):
         """ Show query status for 3 seconds. """
 
         if message != "":
-            self.message.configure(text=message)
-        else:
-            self.message.configure(text="Empty")
+            # Check if message is a dict
+            if isinstance(message, dict):
+                # When no error happened
+                if message["status"] == 0:
+                    self.message.configure(
+                        text=message["results"],
+                        fg_color=cons.COLORS["alert"]["ok"]
+                    )
+                # When some error happened
+                elif message["status"] == 1:
+                    self.message.configure(
+                    text=message["results"],
+                    fg_color=cons.COLORS["alert"]["error"]
+                )
+            else:
+                self.message.configure(text=message)
 
         # Clear label after 3 seconds
         if self.message.cget("text") != "":
@@ -106,7 +120,10 @@ class CategoryWindow(customtkinter.CTkToplevel):
 
     def clear_message(self):
         """ Clear message label. """
-        self.message.configure(text="")
+        self.message.configure(
+            text="",
+            fg_color="transparent"
+        )
 
 
     def delete_category(self, category_id):
